@@ -10,14 +10,31 @@
 
 まず、ソースファイルを使用する場合はVisual Studioからビルドを行ってください。
 
-リリースアプリケーションから実行する場合は、[ここからダウンロード](https://github.com/Sakamaki-So/TaskReviewServer/releases/tag/1.0)し、展開してからtaskreviewserver.exeが存在するディレクトリ上で以下のコマンドを実行してください。
+リリースアプリケーションから実行する場合は、[ここからダウンロード](https://github.com/Sakamaki-So/TaskReviewServer/releases/tag/1.1)し、展開してからtaskreviewserver.exeが存在するディレクトリ上で以下のコマンドを実行してください。
 ```
 taskreviewserver.exe
 ```
 
-次に、APIキー、メールアドレス、パスコードを要求されるので、あらかじめ伝えてあるものを入力してください。認証に失敗した場合はそのままエラーを出力して終了します。
+次に、APIキー、メールアドレス、パスコードを要求されるので、あらかじめ伝えてあるものを入力してください。認証に失敗した場合はそのままエラーを出力して終了します。アプリが正しく実行されている場合は、使用方法可能なコマンドが表示されます。
 
-アプリが正しく実行されている場合は、1分おきにFirebaseから取得したデータを画面上に出力します。アプリを終了するには、何かキーを押すと終了します。
+実行する場合は以下のコマンドを入力します。
+
+```shell
+# 1分ごとに集計、算出し、算出結果で上書きする
+# Firebase内の集計データを表示する。
+launch
+
+# 何分ごとに実行するかを指定する場合(例は2分ごとに設定)
+launch -t 2
+
+# 集計データを非表示にする場合
+launch --hide
+
+# 終了する場合
+exit
+```
+
+
 
 ## 使用ライブラリ
 firebase-database-dotnet: https://github.com/step-up-labs/firebase-database-dotnet
