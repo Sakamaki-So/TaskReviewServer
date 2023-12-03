@@ -8,8 +8,7 @@
 ## 使用方法
 このアプリは.NET環境が必要です。そのため、Windows以外のOSの場合は、.NET SDKをインストールする必要があります。
 
-まず、ソースファイルを使用する場合はVisual Studioからビルドを行ってください。
-
+まず、ソースファイルを使用する場合はVisual Studioからビルドを行っいます。
 リリースアプリケーションから実行する場合は、[ここからダウンロード](https://github.com/Sakamaki-So/TaskReviewServer/releases/tag/1.1)し、展開してからtaskreviewserver.exeが存在するディレクトリ上で以下のコマンドを実行してください。
 ```
 taskreviewserver.exe
