@@ -19,7 +19,7 @@ taskreviewserver.exe
 
 実行する場合は以下のコマンドを入力します。
 
-```cmd
+```shell
 # 1分ごとに集計、算出し、算出結果で上書きする
 # Firebase内の集計データを表示する。
 launch
@@ -32,7 +32,7 @@ launch --hide
 ```
 
 終了する場合は以下のコマンドを使用します。
-```cmd
+```
 exit
 ```
 
