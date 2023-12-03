@@ -3,6 +3,7 @@ using Firebase.Auth;
 using Firebase.Database;
 using Firebase.Database.Query;
 using FirebaseData;
+using System.Globalization;
 
 namespace TaskReviewServer
 {
@@ -59,7 +60,9 @@ namespace TaskReviewServer
                     Console.ResetColor();
                     task.Object.Print(task.Key);
                 }
-                var priority = await CalcPriorityFromEvaluation(firebase, task.Key, isHide);
+                var estimatedTime = task.Object.estimatedTime;
+                var date = GetDateFromJavaFormat(task.Object.deadline ?? "");
+                var priority = await CalcPriorityFromEvaluation(firebase, task.Key, date, estimatedTime, isHide);
                 await firebase.Child(TASK_KEY).Child(task.Key).Child(PRIORITY_KEY).PutAsync(priority);
                 if (isHide == false)
                 {
@@ -75,8 +78,9 @@ namespace TaskReviewServer
                 Console.ResetColor();
             }
         }
-        private static async Task<double> CalcPriorityFromEvaluation(FirebaseClient firebase, string key, bool isHide)
+        private static async Task<double> CalcPriorityFromEvaluation(FirebaseClient firebase, string key, DateTime date, int estimatedTime, bool isHide)
         {
+            double scoreSum = 0;
             double score = 0;
             int evalNum = 0;
             var evals = await firebase
@@ -93,8 +97,8 @@ namespace TaskReviewServer
                 if (eval.Object.firebaseKey != key) continue;
                 if (isHide == false) eval.Object.Print(eval.Key);
                 evalNum++;
-                if (eval.Object.isFinished == false) score += 4.0;
-                else score += eval.Object.evaluation switch
+                if (eval.Object.isFinished == false) scoreSum += 4.0;
+                else scoreSum += eval.Object.evaluation switch
                 {
                     0 => 3.0,
                     1 => 2.5,
@@ -105,7 +109,22 @@ namespace TaskReviewServer
                     _ => 1.0
                 };
             }
-            return Math.Clamp(evalNum == 0 ? score : score / evalNum, 0.0, 2.0);
+            score = evalNum == 0 ? 0 : scoreSum / evalNum;
+            score += Math.Clamp(estimatedTime / 3000, 0.0, 0.5);
+            score += Math.Clamp(0.5 - (DateTime.Now - date).TotalDays / 28, 0.0, 0.5); 
+            return Math.Clamp(score, 0.0, 2.0);
+        }
+
+        private static DateTime GetDateFromJavaFormat(string javaDate)
+        {
+            try
+            {
+                DateTime date = DateTime.ParseExact(javaDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+                return date.Date;
+            }
+            catch (Exception) {
+                return DateTime.Now.Date;
+            }
         }
     }
 }

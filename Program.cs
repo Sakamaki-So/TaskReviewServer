@@ -19,6 +19,7 @@ namespace TaskReviewServer
                 if (!command.Item1)
                 {
                     Console.WriteLine("コマンドが無効です");
+
                     continue;
                 }
                 if (command.Item2 == 0) break;
@@ -29,7 +30,6 @@ namespace TaskReviewServer
         private static void Launch(FirebaseClient firebase, int minute, bool isHide)
         {
             Console.Clear();
-            Console.WriteLine($"{minute} : {isHide}");
             Timer timer = new Timer(
                 async o => await FirebaseManager.ChangePriority(firebase, isHide), null, 0, TIME_MINUTE * minute);
             Console.ReadLine();
