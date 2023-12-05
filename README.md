@@ -6,7 +6,7 @@
 このアプリはFirebase内に格納されたやることリストと評価データを収集し、やることリストの優先度を算出して書き換えます。
 
 ## 使用方法
-このアプリは.NET環境が必要です。そのため、Windows以外のOSの場合は、.NET SDKをインストールする必要があります。
+このアプリは.NET6.0環境が必要です。
 
 まず、ソースファイルを使用する場合はVisual Studioからビルドを行います。
 リリースアプリケーションから実行する場合は、[ここからダウンロード](https://github.com/Sakamaki-So/TaskReviewServer/releases/tag/1.1)し、展開してからtaskreviewserver.exeが存在するディレクトリ上で以下のコマンドを実行します。
