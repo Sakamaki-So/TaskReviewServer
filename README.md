@@ -9,7 +9,7 @@
 このアプリは.NET6.0環境が必要です。
 
 まず、ソースファイルを使用する場合はVisual Studioからビルドを行います。
-リリースアプリケーションから実行する場合は、[ここからダウンロード](https://github.com/Sakamaki-So/TaskReviewServer/releases/tag/1.1)し、展開してからtaskreviewserver.exeが存在するディレクトリ上で以下のコマンドを実行します。
+リリースアプリケーションから実行する場合は、[ここからダウンロード](https://github.com/Sakamaki-So/TaskReviewServer/releases/tag/1.1)して、展開してからtaskreviewserver.exeが存在するディレクトリ上で以下のコマンドを実行します。
 ```
 taskreviewserver.exe
 ```
